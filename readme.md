@@ -1,4 +1,4 @@
-# Clico, the CLI companion that brings the power of AI to your shell
+# Clico, the AI infused CLI companion
 
 This is Clico, a **CLI CO**mpanion tool that enables you to use AI to manipulate output, recommend commands
 or query an LLM using contextual data from your shell history and output.
