@@ -6,21 +6,28 @@
 package main
 
 import (
+	"context"
 	"os"
 
-	"github.com/urfave/cli"
+	"github.com/urfave/cli/v3"
 )
 
 func main() {
-	app := cli.NewApp()
-	app.Name = "clico"
-	app.Usage = "CLI companion tool that brings the power of AI to your shell."
-	app.Version = "0.0.1"
-	app.Commands = []cli.Command{
-		shellCommand,
-		pipeCommand,
-		queryCommand,
+	cmd := &cli.Command{
+		Name:           "Clico",
+		Description:    `Clico is a CLI companion tool that brings the power of AI to your shell.`,
+		Aliases:        []string{},
+		Authors:        []any{},
+		Copyright:      "",
+		Usage:          "",
+		UsageText:      "",
+		Version:        "",
+		DefaultCommand: "pipe",
+		Commands:       []*cli.Command{pipeCommand, shellCommand},
+		Flags:          []cli.Flag{},
 	}
 
-	app.Run(os.Args)
+	if err := cmd.Run(context.Background(), os.Args); err != nil {
+		panic(err)
+	}
 }

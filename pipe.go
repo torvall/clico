@@ -1,13 +1,14 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"os"
 
-	"github.com/urfave/cli"
+	"github.com/urfave/cli/v3"
 )
 
-var pipeCommand = cli.Command{
+var pipeCommand = &cli.Command{
 	Name:      "pipe",
 	Aliases:   []string{"p"},
 	Action:    pipe,
@@ -44,8 +45,8 @@ Omit any prefixes or suffixes, don't use any markup.
 ` + "```" + `
 `
 
-func pipe(c *cli.Context) {
-	prompt := c.String("prompt")
+func pipe(c context.Context, cmd *cli.Command) error {
+	prompt := cmd.Value("prompt")
 
 	// Get length of data in stdin.
 	indatastat, err := os.Stdin.Stat()
@@ -69,4 +70,6 @@ func pipe(c *cli.Context) {
 
 	// Write data to stdout.
 	fmt.Printf("%s\n", outdata)
+
+	return nil
 }
