@@ -68,7 +68,10 @@ main.go 2519
 $ cat /etc/sudoers
 cat: /etc/sudoers: Permission denied
 $ cat /etc/sudoers 2>&1 | clico explain "what does this mean?"
-The command "cat" was used to try and display the contents of the file "/etc/sudoers", but it failed because the user running the command doesn't have permission to access that file. The error message indicates that the file is protected by sudo, which means only users with superuser privileges can read or modify its contents.
+The command "cat" was used to try and display the contents of the file "/etc/sudoers",
+but it failed because the user running the command doesn't have permission to access that
+file. The error message indicates that the file is protected by sudo, which means only
+users with superuser privileges can read or modify its contents.
 ```
 
 ## Installing
