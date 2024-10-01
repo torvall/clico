@@ -13,9 +13,9 @@ your shell to help you develop or debug, or as a troubleshooting tool. Can also 
 
 Clico can work in three different ways:
 
-* `pipe` - takes the data from stdin and feeds it to the LLM together with the prompt
-* `run` - generates a command line from a natural language prompt, and optionally executes it
-* `explain` - takes the data from stdin and runs it through the LLM along with a specific question
+* `clico pipe` - takes the data from stdin and feeds it to the LLM together with the prompt
+* `clico run` - generates a command line from a natural language prompt, and optionally executes it
+* `clico explain` - takes the data from stdin and runs it through the LLM along with a specific question
 
 ## Examples
 
