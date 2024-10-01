@@ -132,12 +132,14 @@ export CLICO_MODEL=codellama
 
 ## TODO
 
-* Add a custom system prompt
 * Expose more model options (context size, top_k/top_p, etc.)
-* Allow custom prompts
+* Add support for "no solution" from the LLM
+* Support image upload in requests
 * Add option to include shell history in `explain` requests
 * Add ANSI support
-* Support more providers like OpenAI
+* Add a custom system prompt
+* Allow custom prompts
+* Support more providers other than Ollama
 
 ## License
 
