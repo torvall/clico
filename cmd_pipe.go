@@ -13,7 +13,7 @@ var pipeCommand = &cli.Command{
 	Name:      "pipe",
 	Aliases:   []string{"p"},
 	Action:    pipe,
-	Usage:     "Transform piped in data.",
+	Usage:     "Transform piped in data",
 	UsageText: "clico [global options] pipe [options] \"prompt\"",
 	Flags:     []cli.Flag{},
 }
@@ -33,9 +33,9 @@ Omit any prefixes or suffixes, don't use any markup.
 
 ## Host system information
 
-Operating system: %s
-Architecture: %s
-Shell: %s
+Operating system: ` + "`%s`" + `
+Architecture: ` + "`%s`" + `
+Shell: ` + "`%s`" + `
 
 ## Stdin data
 

@@ -13,7 +13,7 @@ var explainCommand = &cli.Command{
 	Name:      "explain",
 	Aliases:   []string{"e"},
 	Action:    explain,
-	Usage:     "Query the LLM using shell context information.",
+	Usage:     "Query the LLM using shell context information",
 	UsageText: "clico [global options] explain [options] \"prompt\"",
 	Flags:     []cli.Flag{},
 }
@@ -33,9 +33,9 @@ Omit any prefixes or suffixes, don't use any markup.
 
 ## Host system information
 
-Operating system: %s
-Architecture: %s
-Shell: %s
+Operating system: ` + "`%s`" + `
+Architecture: ` + "`%s`" + `
+Shell: ` + "`%s`" + `
 
 ## Stdin data
 

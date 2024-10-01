@@ -14,7 +14,7 @@ var runCommand = &cli.Command{
 	Name:      "run",
 	Aliases:   []string{"r"},
 	Action:    run,
-	Usage:     "Generate and optionally execute commands.",
+	Usage:     "Generate and optionally execute commands",
 	UsageText: "clico [global options] run [options] \"prompt\"",
 	Flags: []cli.Flag{
 		&cli.BoolFlag{
@@ -35,9 +35,9 @@ Omit any prefixes or suffixes, don't use any markup.
 
 ## Host system information
 
-Operating system: %s
-Architecture: %s
-Shell: %s
+Operating system: ` + "`%s`" + `
+Architecture: ` + "`%s`" + `
+Shell: ` + "`%s`" + `
 
 ## Prompt
 
@@ -79,7 +79,7 @@ func run(c context.Context, cmd *cli.Command) error {
 	} else {
 		// Run the command.
 		cmdStr := strings.TrimSpace(outdata)
-		fmt.Printf("executing %s...\n", cmdStr)
+		fmt.Printf("executing `%s`:\n", cmdStr)
 		cmd := exec.Command("sh", "-c", cmdStr)
 		cmd.Stdout = os.Stdout
 		cmd.Stderr = os.Stderr
