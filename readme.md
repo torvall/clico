@@ -14,8 +14,8 @@ Clico started as a personal project to learn more about LLMs. It's still just a 
 it for anything serious. I'm pretty sure there are much better alternatives around.
 
 Ideally, the prompts templates would return consistent, predictable and reproducible results. Of course results
-vary depending on the user's prompts, but for the same prompt the results should be always the same. A lot of 
-testing is still needed.
+vary depending on the user's prompts, but for the same prompt the results should be always the same. This is not
+guaranteed. A lot of testing is still needed.
 
 ***At the moment, only Ollama is supported.***
 
