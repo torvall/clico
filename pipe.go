@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"os"
+	"strings"
 
 	"github.com/urfave/cli/v3"
 )
@@ -14,9 +15,7 @@ var pipeCommand = &cli.Command{
 	Action:    pipe,
 	Usage:     "Run clico in pipe mode.",
 	UsageText: "clico pipe",
-	Flags: []cli.Flag{
-		flagPrompt,
-	},
+	Flags:     []cli.Flag{},
 }
 
 var pipeTemplate = `# You are Clico, the AI CLI companion
@@ -46,7 +45,7 @@ Omit any prefixes or suffixes, don't use any markup.
 `
 
 func pipe(c context.Context, cmd *cli.Command) error {
-	prompt := cmd.Value("prompt")
+	prompt := strings.Join(cmd.Args().Slice(), " ")
 
 	// Get length of data in stdin.
 	indatastat, err := os.Stdin.Stat()
@@ -54,6 +53,11 @@ func pipe(c context.Context, cmd *cli.Command) error {
 		panic(err)
 	}
 	indatalen := int(indatastat.Size())
+
+	// Bail out if there's no data.
+	if indatalen == 0 {
+		panic("No input provided.")
+	}
 
 	// Get any data in stdin.
 	indata := make([]byte, indatalen)
