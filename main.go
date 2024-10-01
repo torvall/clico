@@ -7,6 +7,7 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"os"
 
 	"github.com/urfave/cli/v3"
@@ -39,6 +40,6 @@ by the LLM. Use with caution.`
 	}
 
 	if err := cmd.Run(context.Background(), os.Args); err != nil {
-		panic(err)
+		fmt.Printf("%s\n", err.Error())
 	}
 }

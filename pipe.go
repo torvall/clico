@@ -47,23 +47,28 @@ Omit any prefixes or suffixes, don't use any markup.
 func pipe(c context.Context, cmd *cli.Command) error {
 	prompt := strings.Join(cmd.Args().Slice(), " ")
 
+	// Bail out if there's no prompt.
+	if len(prompt) == 0 {
+		return fmt.Errorf("no prompt given")
+	}
+
 	// Get length of data in stdin.
 	indatastat, err := os.Stdin.Stat()
 	if err != nil {
-		panic(err)
+		return err
 	}
 	indatalen := int(indatastat.Size())
 
 	// Bail out if there's no data.
 	if indatalen == 0 {
-		panic("No input provided.")
+		return fmt.Errorf("no prompt given")
 	}
 
 	// Get any data in stdin.
 	indata := make([]byte, indatalen)
 	_, err = os.Stdin.Read(indata)
 	if err != nil {
-		panic(err)
+		return err
 	}
 
 	// Build prompt from template.
