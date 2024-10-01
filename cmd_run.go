@@ -74,16 +74,19 @@ func run(c context.Context, cmd *cli.Command) error {
 	execute := cmd.Bool("execute")
 
 	if !execute {
-		// Write data to stdout.
+		// Print the command.
 		fmt.Printf("%s\n", outdata)
 	} else {
 		// Run the command.
 		cmdStr := strings.TrimSpace(outdata)
+
 		fmt.Printf("executing `%s`:\n", cmdStr)
+
 		cmd := exec.Command("sh", "-c", cmdStr)
 		cmd.Stdout = os.Stdout
 		cmd.Stderr = os.Stderr
 		cmd.Stdin = os.Stdin
+
 		err := cmd.Run()
 		if err != nil {
 			return err

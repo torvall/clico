@@ -66,7 +66,7 @@ func explain(c context.Context, cmd *cli.Command) error {
 	indatalen := int(indatastat.Size())
 
 	// Read input data, if any.
-	strindata := "No input data received."
+	strindata := "No input data available."
 	if indatalen > 0 {
 		// Get any data in stdin.
 		indata := make([]byte, indatalen)
