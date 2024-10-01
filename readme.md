@@ -15,8 +15,9 @@ No ncurses, no fancy UI, just plain old command line.
 
 ## Project status
 
-Clico started as a personal project to learn more about LLMs. **It's still just a PoC**, I wouldn't recommend using
-it for anything serious. I'm pretty sure there are much better, more mature alternatives around.
+Clico started as a personal project to learn more about AI, LLMs and the like. **It's still just a PoC**,
+I wouldn't recommend using it for anything serious. I'm pretty sure there are much better, more mature
+alternatives around.
 
 **At the moment, only Ollama is supported.**
 
