@@ -27,6 +27,17 @@ Clico can work in three different ways:
 * `clico run` - generates a command line from a natural language prompt, and optionally executes it
 * `clico explain` - takes the data from stdin and runs it through the LLM along with a specific question
 
+The command line of Clico is pretty simple. It takes the following form:
+
+```sh
+clico <command> "prompt"
+```
+
+Where `<command>` is one of the three commands above, and `"prompt"` is a natural language prompt that
+describes what you want to do. It's recommended to wrap the prompt in double quotes.
+
+### Configuration and options
+
 The model can be specified using the `--model` global flag. The default model is `llama3.1`. You can use the
 `CLICO_MODEL` environment variable to override this value. Other environment variables are available: `CLICO_SERVER`, 
 to set the address of the Ollama server, and `CLICO_TEMPERATURE` to set the temperature of the LLM.
@@ -92,18 +103,36 @@ file. The error message indicates that the file is protected by sudo, which mean
 users with superuser privileges can read or modify its contents.
 ```
 
-## Installing
+## Quick start
 
-At the moment, there's no prebuilt binaries available for download. You'll need to build from source:
+All that's required is that you have an Ollama server running, and a working Go installation.
+
+There's no prebuilt binaries available for download at the moment, so you'll need to
+build the binary from source:
 
 ```sh
 go get -u github.com/torvall/clico
 ```
 
+If your Ollama server is running locally and listening on port `11434`, you are set to go.
+Otherwise, set the `CLICO_SERVER` env var to the address of your Ollama server:
+
+```sh
+export CLICO_SERVER=http://192.168.1.5:11434
+```
+
+If you don't have the `llama3.1` model or want to use a different one, you can set the
+`CLICO_MODEL` env var:
+
+```sh
+export CLICO_MODEL=codellama
+```
+
 ## TODO
 
-* Add a system prompt
+* Add a custom system prompt
 * Expose more model options (context size, top_k/top_p, etc.)
+* Allow custom prompts
 * Add option to include shell history in `explain` requests
 * Add ANSI support
 * Support more providers like OpenAI
