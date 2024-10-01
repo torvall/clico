@@ -1,8 +1,3 @@
-// This is Clico, the CLI companion tool that brings the power of AI to your shell.
-// It has 3 main modes of operation:
-// - Run in shell mode: this is the default mode. You can run it with `clico` or `clico.exe`.
-// - Run in pipe mode: in this mode, Clico can receive commands from stdin and retreive a command from the AI.
-// - Print a command for a natural language query.
 package main
 
 import (
@@ -30,10 +25,9 @@ by the LLM. Use with caution.`
 		Name:        "Clico",
 		Usage:       "The CLI companion tool that brings the power of AI to your shell.",
 		Description: clicoDescription,
-		Authors:     []any{},
 		Copyright:   "2024 (c) António Maria Torre do Valle",
 		UsageText:   "clico [global options] command [command options] \"prompt\"",
-		Version:     "",
+		Version:     "0.0.1",
 		Commands:    []*cli.Command{pipeCommand, shellCommand},
 		Flags:       []cli.Flag{},
 		// DefaultCommand: "pipe",
