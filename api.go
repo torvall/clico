@@ -3,53 +3,53 @@ package main
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 	"io"
-	"log"
 	"net/http"
 )
 
 // Query Ollama using HTTP.
-func queryOllama(prompt string) string {
+func queryAPI(prompt, server, model string, temperature float64) (string, error) {
 	// Prepare the request body.
 	body := map[string]interface{}{
-		"model":  "llama3.1",
+		"model":  model,
 		"prompt": prompt,
 		"options": map[string]float64{
-			"temperature": 0,
+			"temperature": float64(temperature),
 		},
 		"stream": false,
 	}
 
 	jsonBody, err := json.Marshal(body)
 	if err != nil {
-		log.Fatal("Error marshalling JSON body: ", err)
+		return "", fmt.Errorf("error marshalling JSON body: %s", err.Error())
 	}
 
-	req, err := http.NewRequest("POST", "http://localhost:11434/api/generate", bytes.NewBuffer(jsonBody))
+	req, err := http.NewRequest("POST", server+"/api/generate", bytes.NewBuffer(jsonBody))
 	if err != nil {
-		log.Fatal("Error creating request to Ollama server:", err)
+		return "", fmt.Errorf("error creating request: %s", err.Error())
 	}
 	req.Header.Set("Content-Type", "application/json")
 
 	// Send the request and get a response back.
 	resp, err := http.DefaultClient.Do(req)
 	if err != nil {
-		log.Fatal("Error sending request to Ollama server:", err)
+		return "", fmt.Errorf("error sending request to server: %s", err.Error())
 	}
 	defer resp.Body.Close()
 
 	// Read the response body.
 	respBody, err := io.ReadAll(resp.Body)
 	if err != nil {
-		log.Fatal("Error reading response from Ollama server:", err)
+		return "", fmt.Errorf("error reading response body: %s", err.Error())
 	}
 
 	// Parse the response JSON body.
 	var respData map[string]interface{}
 	err = json.Unmarshal(respBody, &respData)
 	if err != nil {
-		log.Fatal("Error unmarshalling response from Ollama server:", err)
+		return "", fmt.Errorf("error unmarshalling response: %s", err.Error())
 	}
 
-	return respData["response"].(string)
+	return respData["response"].(string), nil
 }

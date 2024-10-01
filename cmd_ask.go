@@ -12,7 +12,7 @@ var askCommand = &cli.Command{
 	Name:      "ask",
 	Aliases:   []string{"a"},
 	Action:    ask,
-	Usage:     "Run clico in ask mode.",
+	Usage:     "Query the LLM using shell context information.",
 	UsageText: "clico [global options] ask [options] \"prompt\"",
 	Flags:     []cli.Flag{},
 }
@@ -54,8 +54,15 @@ func ask(c context.Context, cmd *cli.Command) error {
 	// Build prompt from template.
 	promptStr := fmt.Sprintf(askTemplate, localos, localarch, localshell, prompt)
 
+	server := cmd.String("server")
+	model := cmd.String("model")
+	temperature := cmd.Float("temperature")
+
 	// Query Ollama.
-	outdata := queryOllama(promptStr)
+	outdata, err := queryAPI(promptStr, server, model, temperature)
+	if err != nil {
+		return err
+	}
 
 	// Write data to stdout.
 	fmt.Printf("%s\n", outdata)

@@ -36,22 +36,42 @@ by the LLM. Use with caution.`
 		Commands:    []*cli.Command{pipeCommand, runCommand, askCommand},
 		Flags: []cli.Flag{
 			&cli.StringFlag{
-				Name:  "os",
-				Usage: "The operating system to use.",
-				Value: localos,
+				Name:     "os",
+				Usage:    "The operating system to use.",
+				Value:    localos,
+				Category: "Host information",
 			},
 			&cli.StringFlag{
-				Name:  "arch",
-				Usage: "The architecture to use.",
-				Value: localarch,
+				Name:     "arch",
+				Usage:    "The architecture to use.",
+				Value:    localarch,
+				Category: "Host information",
 			},
 			&cli.StringFlag{
-				Name:  "shell",
-				Usage: "The shell to use.",
-				Value: localshell,
+				Name:     "shell",
+				Usage:    "The shell to use.",
+				Value:    localshell,
+				Category: "Host information",
+			},
+			&cli.StringFlag{
+				Name:     "server",
+				Usage:    "The server to connect to.",
+				Value:    "http://localhost:11434",
+				Category: "LLM configuration",
+			},
+			&cli.StringFlag{
+				Name:     "model",
+				Usage:    "The model to use.",
+				Value:    "llama3.1",
+				Category: "LLM configuration",
+			},
+			&cli.FloatFlag{
+				Name:     "temperature",
+				Usage:    "The temperature to use.",
+				Value:    0.0,
+				Category: "LLM configuration",
 			},
 		},
-		// DefaultCommand: "pipe",
 	}
 
 	if err := cmd.Run(context.Background(), os.Args); err != nil {

@@ -13,7 +13,7 @@ var pipeCommand = &cli.Command{
 	Name:      "pipe",
 	Aliases:   []string{"p"},
 	Action:    pipe,
-	Usage:     "Run clico in pipe mode.",
+	Usage:     "Transform piped in data.",
 	UsageText: "clico [global options] pipe [options] \"prompt\"",
 	Flags:     []cli.Flag{},
 }
@@ -84,8 +84,15 @@ func pipe(c context.Context, cmd *cli.Command) error {
 	// Build prompt from template.
 	promptStr := fmt.Sprintf(pipeTemplate, localos, localarch, localshell, indata, prompt)
 
+	server := cmd.String("server")
+	model := cmd.String("model")
+	temperature := cmd.Float("temperature")
+
 	// Query Ollama.
-	outdata := queryOllama(promptStr)
+	outdata, err := queryAPI(promptStr, server, model, temperature)
+	if err != nil {
+		return err
+	}
 
 	// Write data to stdout.
 	fmt.Printf("%s\n", outdata)

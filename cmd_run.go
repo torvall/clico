@@ -14,7 +14,7 @@ var runCommand = &cli.Command{
 	Name:      "run",
 	Aliases:   []string{"r"},
 	Action:    run,
-	Usage:     "Run clico in run mode.",
+	Usage:     "Generate and optionally execute commands.",
 	UsageText: "clico [global options] run [options] \"prompt\"",
 	Flags: []cli.Flag{
 		&cli.BoolFlag{
@@ -61,8 +61,15 @@ func run(c context.Context, cmd *cli.Command) error {
 	// Build prompt from template.
 	promptStr := fmt.Sprintf(runTemplate, localos, localarch, localshell, prompt)
 
+	server := cmd.String("server")
+	model := cmd.String("model")
+	temperature := cmd.Float("temperature")
+
 	// Query Ollama.
-	outdata := queryOllama(promptStr)
+	outdata, err := queryAPI(promptStr, server, model, temperature)
+	if err != nil {
+		return err
+	}
 
 	execute := cmd.Bool("execute")
 
