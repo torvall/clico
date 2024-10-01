@@ -13,7 +13,7 @@ your shell to help you develop or debug, or as a troubleshooting tool. Can also 
 ### Processing data
 
 ```sh
-# ls -l | clico pipe -p "print table with just mode, size and name columns in json format" | jq
+$ ls -l | clico pipe "print table with just mode, size and name columns in json format" | jq
 [
   {
     "mode": "-rw-r--r--",
@@ -39,6 +39,15 @@ your shell to help you develop or debug, or as a troubleshooting tool. Can also 
 ]
 ```
 
+### Getting help with errors
+
+```sh
+$ cat /etc/sudoers
+cat: /etc/sudoers: Permission denied
+$ cat /etc/sudoers 2>&1 | go run . e "what does this mean?"
+The command "cat" was used to try and display the contents of the file "/etc/sudoers", but it failed because the user running the command doesn't have permission to access that file. The error message indicates that the file is protected by sudo, which means only users with superuser privileges can read or modify its contents.
+```
+
 ## Installing
 
 At the moment, there's no prebuilt binaries available for download. You'll need to build from source:
@@ -46,6 +55,13 @@ At the moment, there's no prebuilt binaries available for download. You'll need 
 ```sh
 go get -u github.com/torvall/clico
 ```
+
+## TODO
+
+* Add a system prompt
+* Expose more model options (context size, top_k/top_p, etc.)
+* Add ANSI support
+* Support more providers like OpenAI
 
 ## License
 

@@ -9,25 +9,25 @@ import (
 	"github.com/urfave/cli/v3"
 )
 
-var pipeCommand = &cli.Command{
-	Name:      "pipe",
-	Aliases:   []string{"p"},
-	Action:    pipe,
-	Usage:     "Transform piped in data.",
-	UsageText: "clico [global options] pipe [options] \"prompt\"",
+var explainCommand = &cli.Command{
+	Name:      "explain",
+	Aliases:   []string{"e"},
+	Action:    explain,
+	Usage:     "Query the LLM using shell context information.",
+	UsageText: "clico [global options] explain [options] \"prompt\"",
 	Flags:     []cli.Flag{},
 }
 
-var pipeTemplate = `# You are Clico, the AI CLI companion
+var explainTemplate = `# You are Clico, the AI CLI companion
 
 Hello and welcome to life! You are Clico, an AI powered CLI tool
-that can be used to parse piped in data.
+that can be used to explain shell commmands outputs.
 
 Any existing input is made available to you in the "stdin data" section
 below. The user may refer to it in different ways or implicitly expect
 you to know that's what they're referring to.
 
-Please respond only with the result of the request.
+Please respond only with the explanation requested.
 
 Omit any prefixes or suffixes, don't use any markup.
 
@@ -50,7 +50,7 @@ Shell: %s
 ` + "```" + `
 `
 
-func pipe(c context.Context, cmd *cli.Command) error {
+func explain(c context.Context, cmd *cli.Command) error {
 	prompt := strings.Join(cmd.Args().Slice(), " ")
 
 	// Bail out if there's no prompt.
@@ -65,16 +65,16 @@ func pipe(c context.Context, cmd *cli.Command) error {
 	}
 	indatalen := int(indatastat.Size())
 
-	// Bail out if there's no data.
-	if indatalen == 0 {
-		return fmt.Errorf("no input data")
-	}
-
-	// Get any data in stdin.
-	indata := make([]byte, indatalen)
-	_, err = os.Stdin.Read(indata)
-	if err != nil {
-		return err
+	// Read input data, if any.
+	strindata := "No input data received."
+	if indatalen > 0 {
+		// Get any data in stdin.
+		indata := make([]byte, indatalen)
+		_, err = os.Stdin.Read(indata)
+		if err != nil {
+			return err
+		}
+		strindata = string(indata)
 	}
 
 	localos := cmd.String("os")
@@ -82,7 +82,7 @@ func pipe(c context.Context, cmd *cli.Command) error {
 	localshell := cmd.String("shell")
 
 	// Build prompt from template.
-	promptStr := fmt.Sprintf(pipeTemplate, localos, localarch, localshell, string(indata), prompt)
+	promptStr := fmt.Sprintf(explainTemplate, localos, localarch, localshell, strindata, prompt)
 
 	server := cmd.String("server")
 	model := cmd.String("model")

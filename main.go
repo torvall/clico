@@ -33,7 +33,7 @@ by the LLM. Use with caution.`
 		Copyright:   "2024 (c) António Maria Torre do Valle",
 		UsageText:   "clico [global options] command [command options] \"prompt\"",
 		Version:     "0.0.1",
-		Commands:    []*cli.Command{pipeCommand, runCommand, askCommand},
+		Commands:    []*cli.Command{pipeCommand, runCommand, explainCommand},
 		Flags: []cli.Flag{
 			&cli.StringFlag{
 				Name:     "os",
