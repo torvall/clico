@@ -14,7 +14,7 @@ var pipeCommand = &cli.Command{
 	Aliases:   []string{"p"},
 	Action:    pipe,
 	Usage:     "Run clico in pipe mode.",
-	UsageText: "clico pipe",
+	UsageText: "clico [global options] pipe [options] \"prompt\"",
 	Flags:     []cli.Flag{},
 }
 
@@ -30,6 +30,12 @@ you to know that's what they're referring to.
 Please respond only with the result of the request.
 
 Omit any prefixes or suffixes, don't use any markup.
+
+## Host system information
+
+Operating system: %s
+Architecture: %s
+Shell: %s
 
 ## Stdin data
 
@@ -71,8 +77,12 @@ func pipe(c context.Context, cmd *cli.Command) error {
 		return err
 	}
 
+	localos := cmd.String("os")
+	localarch := cmd.String("arch")
+	localshell := cmd.String("shell")
+
 	// Build prompt from template.
-	promptStr := fmt.Sprintf(pipeTemplate, indata, prompt)
+	promptStr := fmt.Sprintf(pipeTemplate, localos, localarch, localshell, indata, prompt)
 
 	// Query Ollama.
 	outdata := queryOllama(promptStr)
