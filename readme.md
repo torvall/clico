@@ -1,5 +1,7 @@
 # Clico, the AI powered CLI multitool
 
+[![Go](https://github.com/torvall/clico/actions/workflows/build.yml/badge.svg)](https://github.com/torvall/clico/actions/workflows/build.yml)
+
 This is Clico, a **CLI CO**mpanion tool that enables you to use AI to manipulate output, generate commands,
 or query an LLM using contextual data from your shell history and output. It's an AI assistant for your shell.
 
