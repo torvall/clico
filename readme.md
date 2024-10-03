@@ -1,4 +1,4 @@
-# Clico, the AI infused CLI companion
+# Clico, the AI powered CLI multitool
 
 This is Clico, a **CLI CO**mpanion tool that enables you to use AI to manipulate output, generate commands,
 or query an LLM using contextual data from your shell history and output. It's an AI assistant for your shell.
@@ -134,6 +134,7 @@ export CLICO_MODEL=codellama
 
 * Expose more model options (context size, top_k/top_p, etc.)
 * Add support for "no solution" from the LLM
+* Customise internal prompts according to available data
 * Support image upload in requests
 * Add option to include shell history in `explain` requests
 * Add ANSI support
