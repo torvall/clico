@@ -2,7 +2,10 @@ module clico
 
 go 1.22.5
 
-require github.com/urfave/cli/v3 v3.0.0-alpha9
+require (
+	github.com/gravitational/version v0.0.1
+	github.com/urfave/cli/v3 v3.0.0-alpha9
+)
 
 require (
 	github.com/stretchr/testify v1.9.0 // indirect
