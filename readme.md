@@ -3,8 +3,8 @@
 [![Go](https://github.com/torvall/clico/actions/workflows/build.yml/badge.svg)](https://github.com/torvall/clico/actions/workflows/build.yml)
 
 Clico is a command-line utility that enables you to use AI to manipulate output, generate commands,
-or query an LLM using contextual data from your shell history and output. It's not just an AI assistant,
-it's the **CLI CO**mpanion tool for your shell.
+or query an LLM using contextual data. It's not just an AI assistant, it's the **CLI CO**mpanion tool for
+your shell.
 
 It's designed to enable using natural language to perform complex operations in data, assist you in building
 shell commands, and help you troubleshoot all types of issues in any system. A simple, AI-powered swiss army
