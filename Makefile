@@ -26,3 +26,6 @@ package:
 	tar -czvf out/clico-$(VERSION)-macos-arm64.tar.gz out/macos-arm64/clico
 	tar -czvf out/clico-$(VERSION)-windows-amd64.zip out/windows-amd64/clico.exe
 	tar -czvf out/clico-$(VERSION)-windows-arm64.zip out/windows-arm64/clico.exe
+
+tools:
+	go install github.com/gravitational/version/cmd/linkflags

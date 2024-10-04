@@ -1,4 +1,4 @@
-name: Release Clico
+name: Release
 
 on:
   push:
@@ -17,6 +17,8 @@ jobs:
       uses: actions/setup-go@v5
       with:
         go-version: '1.22'
+    
+    - run: make tools
 
     - name: Run GoReleaser
       uses: goreleaser/goreleaser-action@v6
