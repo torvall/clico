@@ -21,33 +21,6 @@ alternatives around.
 
 **At the moment, only Ollama is supported.**
 
-## Usage
-
-Clico can work in three different ways:
-
-* `clico pipe` - takes the data from stdin and feeds it to the LLM together with the prompt, useful to manipulate data
-* `clico run` - generates a command line from a natural language prompt, and optionally executes it
-* `clico explain` - takes the data from stdin and runs it through the LLM along with a specific question
-
-The command line of Clico is pretty simple. It takes the following form:
-
-```sh
-clico <command> "prompt"
-```
-
-Where `<command>` is one of the three commands above, and `"prompt"` is a natural language prompt that
-describes what you want to do. It's recommended to wrap the prompt in double quotes.
-
-### Configuration and options
-
-The model can be specified using the `--model` global flag. The default model is `llama3.1`. You can use the
-`CLICO_MODEL` environment variable to override this value. Other environment variables are available: `CLICO_SERVER`, 
-to set the address of the Ollama server, and `CLICO_TEMPERATURE` to set the temperature of the LLM.
-
-By default, Clico will pass the OS, architecture and shell to the LLM. You can override these values by using the
-`--os`, `--arch` or `--shell` global flags. This can be helpful to generate commands or get explanations for
-a different system than the one you're on. Run `clico --help` to know the values detected for your system.
-
 ## Examples
 
 ### Processing data (`pipe` mode)
@@ -129,6 +102,33 @@ If you don't have the `llama3.1` model or want to use a different one, you can s
 ```sh
 export CLICO_MODEL=codellama
 ```
+
+## Usage
+
+Clico can work in three different ways:
+
+* `clico pipe` - takes the data from stdin and feeds it to the LLM together with the prompt, useful to manipulate data
+* `clico run` - generates a command line from a natural language prompt, and optionally executes it
+* `clico explain` - takes the data from stdin and runs it through the LLM along with a specific question
+
+The command line of Clico is pretty simple. It takes the following form:
+
+```sh
+clico <command> "prompt"
+```
+
+Where `<command>` is one of the three commands above, and `"prompt"` is a natural language prompt that
+describes what you want to do. It's recommended to wrap the prompt in double quotes.
+
+### Configuration and options
+
+The model can be specified using the `--model` global flag. The default model is `llama3.1`. You can use the
+`CLICO_MODEL` environment variable to override this value. Other environment variables are available: `CLICO_SERVER`, 
+to set the address of the Ollama server, and `CLICO_TEMPERATURE` to set the temperature of the LLM.
+
+By default, Clico will pass the OS, architecture and shell to the LLM. You can override these values by using the
+`--os`, `--arch` or `--shell` global flags. This can be helpful to generate commands or get explanations for
+a different system than the one you're on. Run `clico --help` to know the values detected for your system.
 
 ## TODO
 
