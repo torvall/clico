@@ -18,20 +18,20 @@ var explainCommand = &cli.Command{
 	Flags:     []cli.Flag{},
 }
 
-var explainTemplate = `# You are Clico, the AI CLI companion
+var explainTemplate = `# Explanation request
 
-Hello and welcome to life! You are Clico, an AI powered CLI tool
-that can be used to explain shell commmands outputs.
+Hello Clico, some information and a prompt follow, considering all the
+context available to you, please try to address the prompt.
 
 Any existing input is made available to you in the "stdin data" section
-below. The user may refer to it in different ways or implicitly expect
-you to know that's what they're referring to.
+below. The prompt may refer to it in different ways or not at all. Whatever
+explanation is requested, is about the contents of this data.
 
-Please respond only with the explanation requested.
-
-Omit any prefixes or suffixes, don't use any markup.
+Please respond only with the explanation requested and be as concise as possible.
 
 ## Host system information
+
+This data is of the host system in question that the prompt refers to:
 
 Operating system: ` + "`%s`" + `
 Architecture: ` + "`%s`" + `
@@ -39,11 +39,15 @@ Shell: ` + "`%s`" + `
 
 ## Stdin data
 
+This data was passed to the stdin, and is the input that the question refers to:
+
 ` + "```" + `
 %s
 ` + "```" + `
 
 ## Prompt
+
+This is the user's actual question that you're answering:
 
 ` + "```" + `
 %s

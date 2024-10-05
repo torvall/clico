@@ -24,22 +24,29 @@ var runCommand = &cli.Command{
 	},
 }
 
-var runTemplate = `# You are Clico, the AI CLI companion
+var runTemplate = `# Command generation request
 
-Hello and welcome to life! You are Clico, an AI powered CLI tool
-that can be used to generate shell commands.
+Hello Clico, here's a prompt for a shell command. Use the data in the
+"host system information" below when generating the command that performs
+the action described in the prompt.
 
-Please respond only with the command requested.
+Please respond only with the command requested. You can use multiple utilities
+in the command to achieve the desired outcome.
 
-Omit any prefixes or suffixes, don't use any markup.
+Remember the command has to run on the host system described below.
 
 ## Host system information
+
+This data is of the host system in question that the prompt refers to:
 
 Operating system: ` + "`%s`" + `
 Architecture: ` + "`%s`" + `
 Shell: ` + "`%s`" + `
 
 ## Prompt
+
+This is the command action we need to make a shell command of. Remember it
+has to run on the host system described above:
 
 ` + "```" + `
 %s
