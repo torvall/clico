@@ -18,20 +18,18 @@ var pipeCommand = &cli.Command{
 	Flags:     []cli.Flag{},
 }
 
-var pipeTemplate = `# You are Clico, the AI CLI companion
+var pipeTemplate = `# Data transformation request
 
-Hello and welcome to life! You are Clico, an AI powered CLI tool
-that can be used to parse piped in data.
+Hello Clico, some information and a prompt follow, considering all the
+context available to you, please change the data in the "stdin data"
+section below according to the request in the "prompt" section.
 
-Any existing input is made available to you in the "stdin data" section
-below. The user may refer to it in different ways or implicitly expect
-you to know that's what they're referring to.
-
-Please respond only with the result of the request.
-
-Omit any prefixes or suffixes, don't use any markup.
+Please respond only with the output of the transformation requested. If
+no format was requested, use plain text, aligned with tabs if a listing.
 
 ## Host system information
+
+This data is of the host system in question that the prompt refers to:
 
 Operating system: ` + "`%s`" + `
 Architecture: ` + "`%s`" + `
@@ -39,11 +37,16 @@ Shell: ` + "`%s`" + `
 
 ## Stdin data
 
+This data was passed to the stdin, and is the input that the data transformation
+request refers to:
+
 ` + "```" + `
 %s
 ` + "```" + `
 
 ## Prompt
+
+This is the data transformation operation requested by the user:
 
 ` + "```" + `
 %s

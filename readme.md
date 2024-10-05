@@ -3,8 +3,8 @@
 [![Go](https://github.com/torvall/clico/actions/workflows/build.yml/badge.svg)](https://github.com/torvall/clico/actions/workflows/build.yml) [![Release](https://github.com/torvall/clico/actions/workflows/release.yml/badge.svg)](https://github.com/torvall/clico/actions/workflows/release.yml)
 
 Clico is a command-line utility that enables you to use AI to manipulate output, generate commands,
-or query an LLM using contextual data. It's not just an AI assistant, it's the **CLI CO**mpanion tool for
-your shell.
+or query an LLM using contextual data from your shell. It's not just an AI assistant, it's the
+**CLI CO**mpanion tool for your shell.
 
 It's designed to enable using natural language to perform complex operations in data, assist you in building
 shell commands, and help you troubleshoot all types of issues in any system. A simple, AI-powered swiss army
@@ -55,7 +55,7 @@ $ ls -l | clico pipe "print table with just mode, size and name columns in json 
 ]
 ```
 
-### Figuring out the right command (`run` mode)
+### Generating commands (`run` mode)
 
 ```sh
 $ clico run "list all .go files in the current directory and their sizes"
@@ -69,7 +69,7 @@ cmd_run.go 1912
 main.go 2519
 ```
 
-### Getting help with errors (`explain` mode)
+### Getting help (`explain` mode)
 
 ```sh
 $ cat /etc/sudoers
@@ -83,24 +83,26 @@ users with superuser privileges can read or modify its contents.
 
 ## Quick start
 
-All that's required is that you have an Ollama server running, and a working Go installation.
+All that's required is that you have an Ollama server running.
 
-There's no prebuilt binaries available for download at the moment, so you'll need to
-build the binary from source:
+You can find prebuilt binaries [here](https://github.com/torvall/clico/releases).
+
+Or, if you have a working Go setup and want to build the binary from source:
 
 ```sh
 go get -u github.com/torvall/clico
 ```
 
 If your Ollama server is running locally and listening on port `11434`, you are set to go.
-Otherwise, set the `CLICO_SERVER` env var to the address of your Ollama server:
+Otherwise, use the `--server` global option, or set the `CLICO_SERVER` env var to the address
+of your Ollama server:
 
 ```sh
 export CLICO_SERVER=http://192.168.1.5:11434
 ```
 
-If you don't have the `llama3.1` model or want to use a different one, you can set the
-`CLICO_MODEL` env var:
+If you don't have the `llama3.1` model or want to use a different one, you can use `--model` or
+set the `CLICO_MODEL` env var:
 
 ```sh
 export CLICO_MODEL=codellama

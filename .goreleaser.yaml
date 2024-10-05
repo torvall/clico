@@ -37,8 +37,5 @@ archives:
         format: zip
 
 changelog:
-  sort: asc
-  filters:
-    exclude:
-      - "^docs:"
-      - "^test:"
+  use: github
+  sort: empty
